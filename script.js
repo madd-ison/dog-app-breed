@@ -10,20 +10,23 @@ function findImages(userBreed){
     fetch('https://dog.ceo/api/breed/' + userBreed + '/images/random')
     .then(response => response.json())
     .then(responseJson => 
-    displayImages(responseJson));
+    displayImages(responseJson))
 }
 
 function displayImages(responseJson){
   console.log(responseJson);
+  if (responseJson.status === 'error') {
+    $('.results-img').replaceWith('.sorry')
+    $('.error').removeClass('hidden')
+  } else {
     $('.results-img').replaceWith((`<img src="${responseJson.message}" class="results-img">`))
-    $('.images-set').removeClass('hidden')
+    $('.images-set').removeClass('hidden')}
 }
 
 
 function processInput(){
   $('.btn').click(event => {
     event.preventDefault();
-    findImages()
     let userBreed = $('#picValue').val();
     findImages(userBreed);
   });
