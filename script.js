@@ -11,6 +11,7 @@ function findImages(userBreed){
     .then(response => response.json())
     .then(responseJson => 
     displayImages(responseJson))
+    .catch(error => alert("Sorry, there's been an error!"))
 }
 
 function displayImages(responseJson){
